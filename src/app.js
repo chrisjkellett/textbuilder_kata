@@ -1,30 +1,19 @@
 class App {
-  constructor(){
-    this.length = 0,
-    this.minimum = 10,
-    this.rate = 10,
-    this.gaps = 0
+  constructor(text){
+    this.text = text.split(" "),
+    this.exercise = null
   }
 
-  build(str){
-    const array = str.split(" ");
-    this.checkLength(array);
-    this.changeRate(this.length, this.rate);
-    return array.join(" ");
-  }
-
-  changeRate(len, rate){
-    this.gaps = Math.ceil(len / rate);
-  }
-
-  checkLength(array){
-    if(array.length < this.minimum){
+  build(){
+    if(this.text.length !== 10){
       throw new Error;
     }
-    else {
-      this.length = array.length;
-    }
+    const rand = Math.floor(Math.random(0, this.text.length) * 10);
+    const gapped = this.text.slice(0)
+    gapped[rand] = '<gap>';
+    this.exercise = gapped.join(" ");
   }
+
 }
 
 module.exports = App;
